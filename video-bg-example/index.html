@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sua Marca — Landing Simples</title>
+    <meta
+      name="description"
+      content="Landing page simples com hero em vídeo de fundo em loop."
+    />
+
+    <style>
+      :root {
+        --bg-dark: #0f1220;
+        --text: #ffffff;
+        --accent: #38b6ff;
+        --accent-hover: #1095e6;
+        --maxw: 1100px;
+        --radius: 12px;
+        --shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Reset básico */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+          Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: var(--bg-dark);
+        line-height: 1.45;
+      }
+
+      /* Header simples */
+      header {
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+        pointer-events: none; /* mantém cliques no CTA do herói fluindo */
+      }
+      .nav {
+        width: min(100% - 32px, var(--maxw));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 16px;
+        border-radius: var(--radius);
+        backdrop-filter: blur(8px);
+        background: color-mix(in oklab, #0b0e19 70%, transparent);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        pointer-events: auto;
+      }
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .ghost-link {
+        color: #cfd8e3;
+        text-decoration: none;
+        margin-left: 16px;
+      }
+      .ghost-link:hover {
+        text-decoration: underline;
+      }
+
+      /* HERO */
+      .hero {
+        position: relative;
+        min-height: 100svh; /* garante tela cheia em mobile */
+        display: grid;
+        place-items: center;
+        text-align: center;
+        overflow: clip;
+        isolation: isolate;
+      }
+
+      /* Vídeo em background */
+      .hero video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: -2;
+        filter: saturate(110%) contrast(105%);
+      }
+
+      /* Camada de gradiente para legibilidade */
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(15, 18, 32, 0.72),
+          rgba(15, 18, 32, 0.35) 35%,
+          rgba(15, 18, 32, 0.25) 60%,
+          rgba(15, 18, 32, 0.6)
+        );
+        z-index: -1;
+      }
+
+      .hero-inner {
+        width: min(100% - 40px, 820px);
+        margin-inline: auto;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 4px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        opacity: 0.9;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(6px);
+      }
+
+      h1 {
+        margin: 14px 0 10px 0;
+        font-weight: 800;
+        font-size: clamp(28px, 5vw, 56px);
+      }
+      .sub {
+        margin: 0 auto 22px;
+        max-width: 720px;
+        color: #d9e1f2;
+        font-size: clamp(16px, 2.2vw, 19px);
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 20px;
+        border-radius: 10px;
+        background: var(--accent);
+        color: #08111d;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: var(--shadow);
+        transition: transform 0.12s ease, background 0.12s ease,
+          box-shadow 0.12s ease;
+        will-change: transform;
+      }
+      .cta:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+      }
+      .cta:active {
+        transform: translateY(1px);
+      }
+
+      /* Seção de conteúdo após o herói */
+      .section {
+        padding: 64px 16px;
+        background: #0b0f1c;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .container {
+        width: min(100% - 32px, var(--maxw));
+        margin: 0 auto;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .card {
+        background: #0f1426;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 22px;
+      }
+      .card h3 {
+        margin: 0 0 8px 0;
+      }
+
+      /* Acessibilidade: respeitar preferência por movimento reduzido */
+      @media (prefers-reduced-motion: reduce) {
+        .hero video {
+          animation: none;
+          filter: none;
+        }
+      }
+
+      /* Responsivo */
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav" aria-label="Principal">
+        <div class="brand">SuaMarca</div>
+        <div>
+          <a class="ghost-link" href="#beneficios">Benefícios</a>
+          <a class="ghost-link" href="#contato">Contato</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO COM VÍDEO EM LOOP -->
+    <section class="hero" aria-label="Introdução com vídeo">
+      <!-- Dica: manter o arquivo leve (ideal < 8–12 MB). Use .webm + .mp4 -->
+      <video
+        id="heroVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="./hero-poster.png"
+        aria-hidden="true"
+      >
+        <source src="./hero.png" type="video/webm" />
+        <source src="./hero.mp4" type="video/mp4" />
+        <!-- Fallback curto caso o browser não suporte vídeo -->
+        Seu navegador não suporta vídeo em background.
+      </video>
+
+      <div class="hero-inner">
+        <span class="eyebrow">Novo • 2025</span>
+        <h1>Atrair. Engajar. Converter.</h1>
+        <p class="sub">
+          Uma landing page rápida e elegante com vídeo em background para
+          destacar seu produto e aumentar a taxa de conversão sem complicação.
+        </p>
+        <a class="cta" href="#contato" aria-label="Falar com vendas agora">
+          Falar com vendas →
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTEÚDO -->
+    <section id="beneficios" class="section">
+      <div class="container">
+        <h2>Por que funciona</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Foco no objetivo</h3>
+            <p>
+              Estrutura enxuta, mensagem clara e um CTA visível para guiar a
+              ação do usuário.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Carregamento eficiente</h3>
+            <p>
+              Vídeo otimizado com poster e múltiplos formatos para
+              compatibilidade e desempenho.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Responsiva e acessível</h3>
+            <p>
+              Suporte a mobile (playsinline) e respeito a preferências de
+              movimento reduzido.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section" style="background: #0a0e19">
+      <div class="container">
+        <h2>Vamos conversar</h2>
+        <p>Deixe seu e-mail e retornamos rapidamente.</p>
+        <form
+          action="#"
+          method="post"
+          onsubmit="event.preventDefault(); alert('Enviado!');"
+          style="display: grid; gap: 12px; max-width: 520px"
+        >
+          <input
+            name="nome"
+            type="text"
+            placeholder="Seu nome"
+            required
+            style="
+              padding: 14px;
+              border-radius: 10px;
+              border: 1px solid rgba(255, 255, 255, 0.12);
+              background: #0f1426;
+              color: #fff;
+            "
+          />
+          <input
+            name="email"
+            type="email"
+            placeholder="Seu e-mail"
+            required
+            style="
+              padding: 14px;
+              border-radius: 10px;
+              border: 1px solid rgba(255, 255, 255, 0.12);
+              background: #0f1426;
+              color: #fff;
+            "
+          />
+          <button class="cta" type="submit" style="justify-content: center">
+            Enviar
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <footer
+      style="
+        padding: 28px 16px;
+        text-align: center;
+        color: #aeb8cc;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      "
+    >
+      © <span id="year"></span> SuaMarca. Todos os direitos reservados.
+    </footer>
+
+    <script>
+      // Atualiza ano automaticamente
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Melhorias de reprodução:
+      // 1) Garante autoplay em iOS/Android (muted + playsinline já ajuda).
+      // 2) Pausa o vídeo se o usuário preferir movimento reduzido.
+      (function () {
+        var v = document.getElementById("heroVideo");
+        var prefersReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        );
+        function applyMotionPreference(e) {
+          if (e.matches) {
+            try {
+              v.pause();
+            } catch (_) {}
+          } else {
+            try {
+              v.play().catch(function () {
+                /* ignora bloqueio */
+              });
+            } catch (_) {}
+          }
+        }
+        if (prefersReduced) {
+          applyMotionPreference(prefersReduced);
+          prefersReduced.addEventListener("change", applyMotionPreference);
+        }
+        // Reforça mute (alguns navegadores exigem)
+        v.muted = true;
+      })();
+    </script>
+  </body>
+</html>
